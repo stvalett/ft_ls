@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:03:24 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/23 17:45:46 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/24 16:17:16 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,10 @@ static void	print_line(t_dir *current, int len, t_opt *opt)
 			print_lnk(&current[i], current->size_lnk);
 			print_uid(&current[i], current->size_uid);
 			print_gid(&current[i], current->size_gid);
-			print_size(&current[i], current->size);
+			if (S_ISBLK((current + i)->info.st_mode) || S_ISCHR((current + i)->info.st_mode))
+				print_maj_min(&current[i], current->size_min, current->size_maj);
+			else
+				print_size(&current[i], current->size);
 			print_law((current + i)->info.st_mtime, opt);
 			print_link(&current[i], current[i].all_path, opt);
 		}

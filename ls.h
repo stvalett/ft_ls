@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:00:46 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/23 17:18:27 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/24 15:03:41 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ typedef struct		s_dir
 	int				size_lnk;
 	int				size_uid;
 	int				size_gid;
+	int				size_min;
+	int				size_maj;
 }					t_dir;
 
 typedef struct		s_opt
@@ -95,6 +97,7 @@ void                print_link(t_dir *dir, char *lnkpath, t_opt *opt);
 void				print_uid(t_dir *dir, int size);
 void				print_gid(t_dir *dir, int size);
 void                print_name(t_dir *dir, t_opt *opt);
+void				print_maj_min(t_dir *dir, int size_min, int size_maj);
 void				print_filetype(char *name, int i);
 void				ft_error(int i, char *name);
 void				ft_error_argc(char c);
@@ -102,6 +105,8 @@ int					ft_getmax_size(t_dir *dir, t_opt *opt, int len);
 int					ft_getmax_lnk(t_dir *dir, t_opt *opt, int len);
 int					ft_getmax_uid(t_dir *dir, t_opt *opt, int len);
 int					ft_getmax_gid(t_dir *dir, t_opt *opt, int len);
+int					ft_getmax_maj(t_dir *dir, t_opt *opt, int len);
+int					ft_getmax_min(t_dir *dir, t_opt *opt, int len);
 char				*mod_time(char *tmp);
 int					ft_count_all(char *av, t_opt *opt);
 int					ft_one_opt(char *str, char c);

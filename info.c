@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:00:05 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/23 18:44:23 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/24 18:32:23 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static t_mode	*ft_init_mod(void)
 
 static void ft_cal_mode(t_mode *mod, int mode, int *i, int *j)
 {
+	*j = 0;
 	while (*i >= 1 && *i < 4 && *j < 3)
 	{
 		mod->str[*i] = mod->rigth[(mode >> 6) & 0X07][*j];
@@ -51,24 +52,20 @@ static void ft_cal_mode(t_mode *mod, int mode, int *i, int *j)
 	}
 }
 
-static void	ft_more_mode(t_mode *mod, t_dir *current, int i)
+static void	ft_more_mode(t_mode *mod, int mode)
 {
-	if (current->info.st_mode & S_ISVTX && current->info.st_mode & S_IXOTH)
+	if (mode & S_ISVTX && mode & S_IXOTH)
 		mod->str[9] = 't';
-	else if (current->info.st_mode & S_ISVTX && !(current->info.st_mode & S_IXOTH))
+	else if (mode & S_ISVTX && !(mode & S_IXOTH))
 		mod->str[9] = 'T';
-	if (current->info.st_mode & S_ISUID && current->info.st_mode & S_IXUSR)
+	if (mode & S_ISUID && mode & S_IXUSR)
 		mod->str[3] = 's';
-	else if (current->info.st_mode & S_ISUID && !(current->info.st_mode & S_IXUSR))
+	else if (mode & S_ISUID && !(mode & S_IXUSR))
 		mod->str[3] = 'S';
-	if (current->info.st_mode & S_ISGID && current->info.st_mode & S_IXGRP)
+	if (mode & S_ISGID && mode & S_IXGRP)
 		mod->str[6] = 's';
-	else if (current->info.st_mode & S_ISGID && !(current->info.st_mode & S_IXGRP))
+	else if (mode & S_ISGID && !(mode & S_IXGRP))
 		mod->str[6] = 'S';
-	mod->str[i] = '\0';
-	ft_putstr(mod->str);
-	write(1, "  ", 2);
-	ft_free_mod(mod);
 }
 
 static void	ft_get_mode2(t_dir *dir, t_mode *mode)
@@ -100,18 +97,21 @@ void	ft_get_mode(t_dir *current, int l)
 	i = 1;
 	if (i >= 1 && i < 4)
 	{
-		j = 0;
 		ft_cal_mode(mod, current[l].info.st_mode, &i, &j);
+		ft_more_mode(mod, current[l].info.st_mode);
 	}
 	if (i >= 4 && i < 7)
 	{
-		j = 0;
 		ft_cal_mode(mod, current[l].info.st_mode, &i, &j);
+		ft_more_mode(mod, current[l].info.st_mode);
 	}
 	if (i >= 7 && i < 10)
 	{
-		j = 0;
 		ft_cal_mode(mod, current[l].info.st_mode, &i, &j);
+		ft_more_mode(mod, current[l].info.st_mode);
 	}
-	ft_more_mode(mod, current, i);
+	mod->str[i] = '\0';
+	ft_putstr(mod->str);
+	write(1, "  ", 2);
+	ft_free_mod(mod);
 }
