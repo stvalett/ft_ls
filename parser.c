@@ -6,11 +6,33 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:02:28 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/23 19:27:08 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/25 17:41:32 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
+
+static int		get_opt_bis(char av, t_opt *opt)
+{
+	if (av == 'F')
+		opt->o_F = 1;
+	if (av == 'f')
+		opt->o_f = 1;
+	if (av == '1')
+		opt->o_1 = 1;
+	if (av == 'S')
+		opt->o_S = 1;
+	if (av == 'o')
+		opt->o_o = 1;
+	if (av == 'p')
+		opt->o_p = 1;
+	if (opt->o_a != 1 && opt->o_t != 1 &&  opt->o_R != 1 && opt->o_r != 1 
+			&& opt->o_l != 1 && opt->o_A != 1 && opt->o_F != 1 
+			&& opt->o_f != 1 && opt->o_1 != 1 && opt->o_S != 1 && 
+			opt->o_g != 1 && opt->o_o != 1 && opt->o_p != 1)
+		return (0);
+	return (1);
+}
 
 static int		get_opt(char av, t_opt *opt)
 {
@@ -24,36 +46,13 @@ static int		get_opt(char av, t_opt *opt)
 		opt->o_r = 1;
 	if (av == 'l')
 		opt->o_l = 1;
-	if (av == 'd')
-		opt->o_d = 1;
-	if (av == 'F')
-		opt->o_F = 1;
-	if (av == '1')
-		opt->o_1 = 1;
-	if (opt->o_a != 1 && opt->o_t != 1 &&  opt->o_R != 1
-			&& opt->o_r != 1 && opt->o_l != 1 && opt->o_d != 1
-			&& opt->o_F != 1 &&  opt->o_1 != 1)
+	if (av == 'g')
+		opt->o_g = 1;
+	if (av == 'A')
+		opt->o_A = 1;
+	if ((get_opt_bis(av, opt)) == 0)
 		return (0);
-	else
-		return (1);
-}
-
-static t_opt	init_opt(void)
-{
-	t_opt	opt;
-
-	opt.len_opt = 0;
-	opt.o_option = 0;
-	opt.o_d = 0;
-	opt.o_a = 0;
-	opt.o_t = 0;
-	opt.o_R = 0;
-	opt.o_r = 0;
-	opt.o_l = 0;
-	opt.o_F = 0;
-	opt.o_1 = 0;
-	opt.o_nopt = 0;
-	return (opt);
+	return (1);
 }
 
 static int		check_av(char *av, t_opt *opt)
@@ -69,7 +68,7 @@ static int		check_av(char *av, t_opt *opt)
 	{
 		while (av[++i])
 		{
-			if ((ft_one_opt("1latRrF", av[i]) && get_opt(av[i], opt)) ||
+			if ((ft_one_opt("1laAtRfrFSgop", av[i]) && get_opt(av[i], opt)) ||
 					(av[1] == '-' && !av[2]))
 			{
 				flag = 1;

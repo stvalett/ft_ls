@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:01:36 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/23 17:02:01 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/25 15:45:52 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ static void  print_only(t_dir *dir, int len, t_opt *opt)
 			;
 		else
 		{
-			if (opt->o_l == 1)
+			if (opt->o_l == 1 || opt->o_g == 1 || opt->o_o == 1)
 			{
 				ft_get_mode(dir , i);
 				print_lnk(&dir[i], dir->size_lnk);
-				print_uid(&dir[i], dir->size_uid);
-				print_gid(&dir[i], dir->size_gid);
+				print_uid(&dir[i], dir->size_uid, opt);
+				print_gid(&dir[i], dir->size_gid, opt);
 				print_size(&dir[i], dir->size);
 				print_law(dir[i].info.st_mtime, opt);
 				print_link(&dir[i], dir[i].name, opt);

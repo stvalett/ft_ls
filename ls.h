@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:00:46 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/24 15:03:41 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/25 17:44:06 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,19 @@ typedef struct		s_opt
 	int				len_opt;
 	int				o_option;
 	int				file;
-	int				o_nopt;
 	int				o_1;
 	int				o_a;
 	int				o_t;
 	int				o_R;
 	int				o_r;
 	int				o_l;
-	int				o_d;
+	int				o_A;
 	int             o_F;
+	int				o_f;
+	int				o_S;
+	int				o_g;
+	int				o_o;
+	int				o_p;
 }					t_opt;
 
 typedef struct      s_mode
@@ -82,6 +86,8 @@ typedef struct      s_mode
 }                   t_mode;
 
 t_opt				check_opt(int ac, char **av);
+t_opt				init_opt(void);
+void				valide_opt(t_opt *opt, char *av);
 void				lstdir(char *av, t_opt opt);
 void				print_all(t_dir *current, int len, t_opt *opt, int flag);
 void				ft_get_mode(t_dir *current, int l);
@@ -90,15 +96,16 @@ void				ft_free_current(t_dir *current, int ret, int flag);
 void				ft_link(t_dir *current);
 void				ft_init_sort(t_dir *current, int len, t_opt *opt);
 void				ft_init_size(t_dir *current, t_opt *opt, int len);
+void				ft_total_block(t_dir *current, t_opt *opt, int len);
 void				print_law(long date, t_opt *opt);
 void				print_size(t_dir *dir, int size);
 void				print_lnk(t_dir *dir, int size);
 void                print_link(t_dir *dir, char *lnkpath, t_opt *opt);
-void				print_uid(t_dir *dir, int size);
-void				print_gid(t_dir *dir, int size);
+void				print_uid(t_dir *dir, int size, t_opt *opt);
+void				print_gid(t_dir *dir, int size, t_opt *opt);
 void                print_name(t_dir *dir, t_opt *opt);
 void				print_maj_min(t_dir *dir, int size_min, int size_maj);
-void				print_filetype(char *name, int i);
+void				print_filetype(char *name, int i, int *flag);
 void				ft_error(int i, char *name);
 void				ft_error_argc(char c);
 int					ft_getmax_size(t_dir *dir, t_opt *opt, int len);

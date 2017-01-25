@@ -6,7 +6,7 @@
 #    By: stvalett <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/23 16:57:07 by stvalett          #+#    #+#              #
-#    Updated: 2017/01/23 17:12:25 by stvalett         ###   ########.fr        #
+#    Updated: 2017/01/25 15:41:13 by stvalett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS = dir.c\
 	   size.c\
 	   sort.c\
 	   tool.c\
+	   utils.c
 
 OBJ = $(SRCS:.c=.o)
 

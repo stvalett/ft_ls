@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:10:03 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/23 17:10:22 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/25 17:27:15 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,42 @@ static void		ft_sort_time(t_dir *current, int len, t_opt *opt)
 	}
 }
 
+static void ft_sort_size(t_dir *current, int len, t_opt *opt)
+{
+	t_dir tmp;
+	int		i;
+	int		flag;
+
+	if (opt->o_S == 0)
+		return ;
+	i = 0;
+	flag = 1;
+	while (flag)
+	{
+		flag = 0;
+		i = 0;
+		while (i < len - 1)
+		{
+			if ((current + i)->info.st_size < (current + i + 1)->info.st_size)
+			{
+				tmp = current[i];
+				current[i] = current[i + 1];
+				current[i + 1] = tmp;
+				flag = 1;
+			}
+			i++;
+		}
+		len--;
+	}
+}
+
 void	ft_init_sort(t_dir *current, int len, t_opt *opt)
 {
-	ft_sort_alpha(current, len);
-	ft_sort_time(current, len, opt);
-	ft_reverse(current, len, opt);
+	if (!opt->o_f)
+	{
+		ft_sort_alpha(current, len);
+		ft_sort_time(current, len, opt);
+		ft_sort_size(current, len, opt);
+		ft_reverse(current, len, opt);
+	}
 }

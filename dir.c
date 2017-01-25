@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 16:58:25 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/23 19:45:09 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/25 17:34:31 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void	lstdir(char *av, t_opt opt)
 		return ;
 	}
 	while ((file = readdir(path)) != NULL)
-		if (!opt.o_a)
+		if (!opt.o_a && !opt.o_A && !opt.o_f)
 		{
 			if (file->d_name[0] != '.')
 				current[i++] = get_path(av, file);
