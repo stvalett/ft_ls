@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:09:21 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/26 16:54:53 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/26 19:56:24 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,21 @@ int		ft_getmax_size(t_dir *dir, t_opt *opt, int len)
 	countmax = 0;
 	i = -1;
 	while (++i < len)
-	{
 		if (!opt->o_a && !opt->o_f)
 		{
 			if (((ft_strcmp((dir + i)->name, ".")) != 0
 						&& ((ft_strcmp((dir + i)->name, "..")) != 0
-							&& (opt->o_l == 1 || opt->o_g == 1 || opt->o_o == 1))))
-				count = ft_lendigit((int)(dir +i)->info.st_size);
+							&& (opt->o_l || opt->o_g || opt->o_o))))
+				count = ft_lendigit((int)(dir + i)->info.st_size);
 			if (count > countmax)
 				countmax = count;
 		}
 		else
 		{
-			count = ft_lendigit((int)(dir +i)->info.st_size);
+			count = ft_lendigit((int)(dir + i)->info.st_size);
 			if (count > countmax)
 				countmax = count;
 		}
-	}
 	return (countmax);
 }
 
@@ -62,23 +60,21 @@ int		ft_getmax_lnk(t_dir *dir, t_opt *opt, int len)
 	countmax = 0;
 	i = -1;
 	while (++i < len)
-	{
 		if (!opt->o_a && !opt->o_f)
 		{
 			if (((ft_strcmp((dir + i)->name, ".")) != 0
 						&& ((ft_strcmp((dir + i)->name, "..")) != 0
-							&& (opt->o_l == 1 || opt->o_g == 1 || opt->o_o == 1))))
-				count = ft_lendigit((int)(dir +i)->info.st_nlink);
+							&& (opt->o_l || opt->o_g || opt->o_o))))
+				count = ft_lendigit((int)(dir + i)->info.st_nlink);
 			if (count > countmax)
 				countmax = count;
 		}
 		else
 		{
-			count = ft_lendigit((int)(dir +i)->info.st_nlink);
+			count = ft_lendigit((int)(dir + i)->info.st_nlink);
 			if (count > countmax)
 				countmax = count;
 		}
-	}
 	return (countmax);
 }
 
@@ -117,74 +113,14 @@ int		ft_getmax_gid(t_dir *dir, t_opt *opt, int len)
 	i = -1;
 	while (++i < len)
 	{
-		if (((ft_strcmp((dir + i)->name, ".")) != 0 && ((ft_strcmp((dir + i)->name, "..")) != 0
-						&& (opt->o_l == 1 || opt->o_g == 1 || opt->o_o == 1))))
+		if ((fcmp((dir + i)->name, ".") != 0 && fcmp((dir + i)->name, "..") != 0
+						&& (opt->o_l || opt->o_g || opt->o_o)))
 		{
 			dir->gid = *getgrgid(dir[i].info.st_gid);
 			count = ft_strlen(dir->gid.gr_name);
 		}
 		if (count > countmax)
 			countmax = count;
-	}
-	return (countmax);
-}
-
-int		ft_getmax_maj(t_dir *dir, t_opt *opt, int len)
-{
-	int	i;
-	int count;
-	int	countmax;
-
-	count = 0;
-	countmax = 0;
-	i = -1;
-	while (++i < len)
-	{
-		if (!opt->o_a && !opt->o_f)
-		{
-			if ((ft_strcmp((dir + i)->name, ".")) != 0
-						&& ((ft_strcmp((dir + i)->name, "..")) != 0
-							&& (opt->o_l == 1 || opt->o_g == 1 || opt->o_o == 1)))
-				count = ft_lendigit((major((dir + i)->info.st_rdev)));
-			if (count > countmax)
-				countmax = count;
-		}
-		else 
-		{
-			count = ft_lendigit(major((dir + i)->info.st_rdev));
-			if (count > countmax)
-				countmax = count;
-		}
-	}
-	return (countmax);
-}
-
-int		ft_getmax_min(t_dir *dir, t_opt *opt, int len)
-{
-	int	i;
-	int count;
-	int	countmax;
-
-	count = 0;
-	countmax = 0;
-	i = -1;
-	while (++i < len)
-	{
-		if (!opt->o_a && !opt->o_f)
-		{
-			if (((ft_strcmp((dir + i)->name, ".")) != 0
-						&& ((ft_strcmp((dir + i)->name, "..")) != 0
-							&& (opt->o_l == 1 || opt->o_g == 1 || opt->o_o == 1))))
-				count = ft_lendigit(minor((dir + i)->info.st_rdev));
-			if (count > countmax)
-				countmax = count;
-		}
-		else 
-		{
-			count = ft_lendigit(minor((dir + i)->info.st_rdev));
-			if (count > countmax)
-				countmax = count;
-		}
 	}
 	return (countmax);
 }

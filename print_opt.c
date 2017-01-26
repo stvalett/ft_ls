@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:06:20 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/25 15:45:15 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/26 19:43:46 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	print_lnk(t_dir *dir, int size)
 {
 	int i;
 
+	write(1, "  ", 2);
 	i = size - ft_lendigit((int)dir->info.st_nlink);
 	while (i-- > 0)
 		write(1, " ", 1);

@@ -6,13 +6,13 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 16:58:25 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/26 17:16:57 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/26 17:47:29 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-static int	get_addpath(t_dir *current, char path[MAX_PATH])
+static int		get_addpath(t_dir *current, char path[MAX_PATH])
 {
 	ft_strcpy(path, current->pathdir);
 	ft_strcat(path, "/");
@@ -20,7 +20,7 @@ static int	get_addpath(t_dir *current, char path[MAX_PATH])
 	return (0);
 }
 
-static void	isdir(t_dir *current, t_opt *opt)
+static void		isdir(t_dir *current, t_opt *opt)
 {
 	char	*d_name;
 	char	path[MAX_PATH];
@@ -64,10 +64,10 @@ static t_dir	get_path(char *av, struct dirent *file)
 	return (current);
 }
 
-static void	lstdir2(t_dir *current, t_opt *opt, int i, char *av)
+static void		lstdir2(t_dir *current, t_opt *opt, int i, char *av)
 {
-	int 		ret;
-	static int      count;
+	int				ret;
+	static	int		count;
 
 	ret = 0;
 	if (++count == 1 && opt->len_opt == 1)
@@ -89,19 +89,20 @@ static void	lstdir2(t_dir *current, t_opt *opt, int i, char *av)
 	}
 	else
 		print_all(&current[0], i, opt, 0);
-	while (ret < i && opt->o_R == 1)
+	while (ret < i && opt->o_up_r == 1)
 		isdir(&current[ret++], opt);
 }
 
-void	lstdir(char *av, t_opt opt)
+void			lstdir(char *av, t_opt opt)
 {
-	int 			i;
+	int				i;
 	t_dir			*current;
 	DIR				*path;
-	struct dirent 	*file;
+	struct dirent	*file;
 
 	i = 0;
-	if ((current  = (t_dir *)malloc(sizeof(t_dir) * ft_count_all(av, &opt))) == NULL)
+	if ((current = (t_dir *)malloc(sizeof(t_dir) *
+					ft_count_all(av, &opt))) == NULL)
 		exit(1);
 	if ((path = opendir(av)) == NULL)
 	{
@@ -109,7 +110,7 @@ void	lstdir(char *av, t_opt opt)
 		return ;
 	}
 	while ((file = readdir(path)) != NULL)
-		if (!opt.o_a && !opt.o_A && !opt.o_f)
+		if (!opt.o_a && !opt.o_up_a && !opt.o_f)
 		{
 			if (file->d_name[0] != '.')
 				current[i++] = get_path(av, file);

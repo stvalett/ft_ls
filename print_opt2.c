@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:08:20 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/26 17:00:16 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/26 20:05:03 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ static char	*print_law_bis(char *tmp, char *tmp2, int *flag)
 		free(tmp2);
 	}
 	return (tmp);
-
 }
-void	print_law(long date, t_opt *opt)
+
+void		print_law(long date, t_opt *opt)
 {
 	char	*tmp;
 	char	*tmp2;
@@ -47,7 +47,7 @@ void	print_law(long date, t_opt *opt)
 		return ;
 	timenow = time(0);
 	tmp = ctime(&date);
-	flag= 0;
+	flag = 0;
 	tmp2 = NULL;
 	if ((timenow - 15778800) > date || timenow < date)
 		tmp = print_law_bis(tmp, tmp2, &flag);
@@ -69,7 +69,7 @@ void		ft_total_block(t_dir *current, t_opt *opt, int len)
 
 	i = 0;
 	total = 0;
-	if ((!opt->o_l || (opt->file && !opt->o_a)) 
+	if ((!opt->o_l || (opt->file && !opt->o_a))
 			&& !opt->o_g && !opt->o_o)
 		return ;
 	else
@@ -82,19 +82,19 @@ void		ft_total_block(t_dir *current, t_opt *opt, int len)
 	ft_putchar('\n');
 }
 
-void    print_filetype(char *name, int i, int *flag, t_opt *opt)
+void		print_filetype(char *name, int i, int *flag, t_opt *opt)
 {
 	*flag = 0;
 	if (i == 1)
 	{
-		if (opt->o_G && opt->o_F)
+		if (opt->o_up_g && opt->o_up_f)
 		{
 			ft_putstr(BLUE);
 			ft_putstr(name);
 			ft_putendl("/");
 			ft_putstr(RESET);
 		}
-		else if (opt->o_G)
+		else if (opt->o_up_g)
 		{
 			ft_putstr(BLUE);
 			ft_putendl(name);
@@ -107,18 +107,20 @@ void    print_filetype(char *name, int i, int *flag, t_opt *opt)
 		}
 	}
 	print_filetype_bis(name, opt, i);
+	if (i == 3)
+		ft_putstr(name);
 }
 
-void    print_link(t_dir *dir, char *lnkpath, t_opt *opt)
+void		print_link(t_dir *dir, char *lnkpath, t_opt *opt)
 {
-	int     path_size;
+	int		path_size;
 
 	if (!(DT_LNK == dir->type))
 	{
 		print_name(dir, opt);
 		return ;
 	}
-	else if (opt->o_G)
+	else if (opt->o_up_g)
 	{
 		print_link_colors(dir, lnkpath);
 		return ;

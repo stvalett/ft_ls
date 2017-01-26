@@ -6,13 +6,13 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 16:59:15 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/26 15:11:54 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/26 17:28:20 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-void	ft_error(int i ,char *name)
+void	ft_error(int i, char *name)
 {
 	int flag;
 
@@ -47,6 +47,7 @@ void	ft_error_argc(char c)
 	ft_putstr_fd("illegal option -- ", 2);
 	ft_putchar_fd(c, 2);
 	ft_putchar_fd('\n', 2);
-	ft_putendl_fd("usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]", 2);
+	ft_putendl_fd("usage: ls [-ABCFGHLOPRSTUWabcde\
+			fghiklmnopqrstuwx1] [file ...]", 2);
 	exit(1);
 }

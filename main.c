@@ -6,13 +6,13 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:01:36 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/26 16:58:35 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/26 18:15:07 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-static t_dir    check_error(char *av)
+static t_dir	check_error(char *av)
 {
 	t_dir dir;
 
@@ -32,22 +32,22 @@ static t_dir    check_error(char *av)
 	return (dir);
 }
 
-static void  print_only(t_dir *dir, int len, t_opt *opt)
+static void		print_only(t_dir *dir, int len, t_opt *opt)
 {
 	int i;
 
-	i = 0;
+	i = -1;
 	ft_init_sort(dir, len, opt);
 	ft_init_size(dir, opt, len);
-	while (i < len)
+	while (++i < len)
 	{
 		if (ft_strcmp(dir[i].name, "NULL") == 0)
 			;
 		else
 		{
-			if (opt->o_l == 1 || opt->o_g == 1 || opt->o_o == 1 || opt->o_u == 1)
+			if (opt->o_l || opt->o_g || opt->o_o || opt->o_u)
 			{
-				ft_get_mode(dir , i);
+				ft_get_mode(dir, i);
 				print_lnk(&dir[i], dir->size_lnk);
 				print_uid(&dir[i], dir->size_uid, opt);
 				print_gid(&dir[i], dir->size_gid, opt);
@@ -58,13 +58,12 @@ static void  print_only(t_dir *dir, int len, t_opt *opt)
 			else
 				print_name(&dir[i], opt);
 		}
-		i++;
 	}
 }
 
 static void		ft_sort_file(t_opt *opt, int len)
 {
-	char 	*tmp;
+	char	*tmp;
 	int		i;
 	int		flag;
 
@@ -91,9 +90,9 @@ static void		ft_sort_file(t_opt *opt, int len)
 
 static t_dir	*lstfile(int ac, char **av, int *k, int *count)
 {
-	DIR     *path;
+	DIR		*path;
 	t_opt	opt;
-	t_dir   *dir;
+	t_dir	*dir;
 	int		i;
 
 	dir = NULL;
@@ -118,7 +117,7 @@ static t_dir	*lstfile(int ac, char **av, int *k, int *count)
 	return (dir);
 }
 
-int		main(int ac, char **av)
+int				main(int ac, char **av)
 {
 	t_opt	opt;
 	t_dir	*dir;

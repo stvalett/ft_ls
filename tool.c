@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:10:27 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/25 11:47:01 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/26 20:11:52 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		ft_one_opt(char *str, char c)
 	return (0);
 }
 
-int     ft_lendigit(int len)
+int		ft_lendigit(int len)
 {
 	int count;
 
@@ -81,11 +81,11 @@ void	ft_free_current(t_dir *current, int ret, int flag)
 	}
 }
 
-int     ft_count_all(char *av, t_opt *opt)
+int		ft_count_all(char *av, t_opt *opt)
 {
-	int             count;
-	struct dirent   *file;
-	DIR             *path;
+	int				count;
+	struct dirent	*file;
+	DIR				*path;
 
 	count = 0;
 	if ((path = opendir(av)) == NULL)

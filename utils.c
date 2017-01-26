@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 15:33:04 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/26 17:08:01 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/26 20:09:17 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,31 @@ t_opt	init_opt(void)
 	opt.len_opt = 0;
 	opt.o_option = 0;
 	opt.o_no_format = 1;
-	opt.o_A = 0;
+	opt.o_up_a = 0;
 	opt.o_a = 0;
 	opt.o_t = 0;
-	opt.o_R = 0;
+	opt.o_up_r = 0;
 	opt.o_r = 0;
 	opt.o_l = 0;
-	opt.o_F = 0;
+	opt.o_up_f = 0;
 	opt.o_f = 0;
 	opt.o_1 = 0;
-	opt.o_S = 0;
+	opt.o_up_s = 0;
 	opt.o_g = 0;
-	opt.o_G = 0;
+	opt.o_up_g = 0;
 	opt.o_o = 0;
 	opt.o_p = 0;
 	opt.o_u = 0;
 	return (opt);
 }
-void ft_sort_time_bis(t_dir *current, int len, t_opt *opt)
+
+void	ft_sort_time_bis(t_dir *current, int len, t_opt *opt)
 {
-	t_dir tmp;
+	t_dir	tmp;
 	int		i;
 	int		flag;
 
-	if ((opt->o_l == 1 && opt->o_t == 0) || opt->o_S == 1)
+	if ((opt->o_l == 1 && opt->o_t == 0) || opt->o_up_s == 1)
 		return ;
 	i = 0;
 	flag = 1;
@@ -87,14 +88,14 @@ void	print_filetype_bis(char *name, t_opt *opt, int i)
 {
 	if (i == 2)
 	{
-		if (opt->o_G && opt->o_F)
+		if (opt->o_up_g && opt->o_up_f)
 		{
 			ft_putstr(RED);
 			ft_putstr(name);
 			ft_putendl("*");
 			ft_putstr(RESET);
 		}
-		else if (opt->o_G)
+		else if (opt->o_up_g)
 		{
 			ft_putstr(RED);
 			ft_putendl(name);
@@ -107,10 +108,7 @@ void	print_filetype_bis(char *name, t_opt *opt, int i)
 		}
 	}
 	if (i == 3)
-	{
-		ft_putstr(name);
 		ft_putstr("@");
-	}
 }
 
 void	isdir_bis(t_dir *current, char *name)
@@ -124,5 +122,5 @@ void	isdir_bis(t_dir *current, char *name)
 			&& !(current->info.st_mode & S_IROTH)
 			&& !(current->info.st_mode & S_IWOTH)
 			&& !(current->info.st_mode & S_IXOTH))
-	ft_error(1, name);
+		ft_error(1, name);
 }

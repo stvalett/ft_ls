@@ -6,13 +6,13 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:00:05 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/24 18:32:23 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/26 17:36:44 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-static t_mode	*ft_init_mod(void)
+static	t_mode	*ft_init_mod(void)
 {
 	t_mode	*mod;
 
@@ -23,7 +23,7 @@ static t_mode	*ft_init_mod(void)
 	return (mod);
 }
 
-static void ft_cal_mode(t_mode *mod, int mode, int *i, int *j)
+static	void	ft_cal_mode(t_mode *mod, int mode, int *i, int *j)
 {
 	*j = 0;
 	while (*i >= 1 && *i < 4 && *j < 3)
@@ -52,7 +52,7 @@ static void ft_cal_mode(t_mode *mod, int mode, int *i, int *j)
 	}
 }
 
-static void	ft_more_mode(t_mode *mod, int mode)
+static	void	ft_more_mode(t_mode *mod, int mode)
 {
 	if (mode & S_ISVTX && mode & S_IXOTH)
 		mod->str[9] = 't';
@@ -68,7 +68,7 @@ static void	ft_more_mode(t_mode *mod, int mode)
 		mod->str[6] = 'S';
 }
 
-static void	ft_get_mode2(t_dir *dir, t_mode *mode)
+static	void	ft_get_mode2(t_dir *dir, t_mode *mode)
 {
 	if (S_ISLNK(dir->info.st_mode))
 		mode->str[0] = 'l';
@@ -86,10 +86,10 @@ static void	ft_get_mode2(t_dir *dir, t_mode *mode)
 		mode->str[0] = '-';
 }
 
-void	ft_get_mode(t_dir *current, int l)
+void			ft_get_mode(t_dir *current, int l)
 {
 	t_mode	*mod;
-	int 	i;
+	int		i;
 	int		j;
 
 	mod = ft_init_mod();
@@ -112,6 +112,5 @@ void	ft_get_mode(t_dir *current, int l)
 	}
 	mod->str[i] = '\0';
 	ft_putstr(mod->str);
-	write(1, "  ", 2);
 	ft_free_mod(mod);
 }

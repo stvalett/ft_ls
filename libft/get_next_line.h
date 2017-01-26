@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 11:01:18 by stvalett          #+#    #+#             */
-/*   Updated: 2016/12/07 11:18:02 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/26 20:17:21 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include "libft.h"
 
-# define BUFF_SIZE 19	
+# define BUFF_SIZE 19
 # define CHAR		'\n'
 
 typedef	struct		s_line
