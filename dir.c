@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 16:58:25 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/25 17:34:31 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/26 17:16:57 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,7 @@ static void	isdir(t_dir *current, t_opt *opt)
 				ft_putendl(":");
 			}
 			stat(d_name, &current->info);
-			if (!(current->info.st_mode & S_IRUSR) && !(current->info.st_mode & S_IWUSR) 
-					&& !(current->info.st_mode & S_IXUSR) && !(current->info.st_mode & S_IRGRP)
-					&& !(current->info.st_mode & S_IWGRP) && !(current->info.st_mode & S_IXGRP) 
-					&& !(current->info.st_mode & S_IROTH) && !(current->info.st_mode & S_IWOTH)
-					&& !(current->info.st_mode & S_IXOTH))
-				ft_error(1, d_name);
+			isdir_bis(current, d_name);
 			lstdir(current->all_path, *opt);
 		}
 	}
@@ -51,7 +46,7 @@ static void	isdir(t_dir *current, t_opt *opt)
 
 static t_dir	get_path(char *av, struct dirent *file)
 {
-	t_dir 	current;
+	t_dir	current;
 	int		path_length;
 
 	current.pathdir = ft_strdup(av);
@@ -75,8 +70,7 @@ static void	lstdir2(t_dir *current, t_opt *opt, int i, char *av)
 	static int      count;
 
 	ret = 0;
-	count ++;
-	if (opt->len_opt == 1 && count == 1)
+	if (++count == 1 && opt->len_opt == 1)
 		print_all(&current[0], i, opt, 0);
 	else if (count >= 1 && opt->len_opt > 1)
 	{
@@ -84,9 +78,9 @@ static void	lstdir2(t_dir *current, t_opt *opt, int i, char *av)
 			ft_putchar('\n');
 		if ((current[0].pathdir) == NULL)
 			ft_putstr(av);
-		else if (ft_strcmp(current[0].pathdir, "./") == 0 &&  opt->len_opt == 2)
+		else if (ft_strcmp(current[0].pathdir, "./") == 0 && opt->len_opt == 2)
 			ft_putstr(".");
-		else if (ft_strcmp(current[0].pathdir, ".") == 0)
+		else if (ft_strcmp(current[0].pathdir, ".") == 0 && count >= 2)
 			ft_putstr("./");
 		else
 			ft_putstr(current[0].pathdir);

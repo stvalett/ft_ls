@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:03:24 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/26 15:17:09 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/26 16:59:45 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	print_link_bis(t_dir *dir, t_opt *opt)
 {
 	int path_size;
-	if (lstat(dir->name, &dir->info) == 0 && opt->o_l == 1)
+	if (lstat(dir->name, &dir->info) == 0 && opt->o_l)
 		{
 			ft_putstr(dir->name);
 			if ((path_size = readlink(dir->name, dir->name, MAX_PATH)) < 0)
@@ -35,21 +35,18 @@ void    print_name(t_dir *dir, t_opt *opt)
 	flag = 1;
 	if ((S_ISDIR(dir->info.st_mode)))
 	{
-		//ft_putstr(BLUE);
-		if (opt->o_F || opt->o_p)
-			print_filetype(dir->name, 1, &flag);
+		if (opt->o_F || opt->o_p || opt->o_G)
+			print_filetype(dir->name, 1, &flag, opt);
 	}
 	else if ((S_ISREG(dir->info.st_mode)) && (dir->info.st_mode & 0001))
 	{
-		//ft_putstr(RED);
-		if (opt->o_F)
-			print_filetype(dir->name, 2, &flag);
+		if (opt->o_F || opt->o_G)
+			print_filetype(dir->name, 2, &flag, opt);
 	}
 	else if (S_ISLNK(dir->info.st_mode))
 	{
-		//ft_putstr(YELLOW);
-		if (opt->o_F)
-			print_filetype(dir->name, 3, &flag);
+		if (opt->o_F || opt->o_G)
+			print_filetype(dir->name, 3, &flag, opt);
 		print_link_bis(dir, opt);
 		flag = 0;
 	}

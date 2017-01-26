@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:08:20 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/26 15:07:24 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/26 17:00:16 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ static char	*print_law_bis(char *tmp, char *tmp2, int *flag)
 	}
 	else
 	{
-		//tmp2 = ft_strnew(9);
-		tmp2 = malloc(sizeof(char) * 3 + 1);
+		tmp2 = ft_strnew(4);
 		tmp2 = ft_strsub(tmp, 20, 24);
 		tmp = ft_strsub(tmp, 4, 6);
 		tmp = ft_strjoin(tmp, "  ");
@@ -44,13 +43,13 @@ void	print_law(long date, t_opt *opt)
 	time_t	timenow;
 	int		flag;
 
-	if (opt->o_l == 0 && !opt->o_g && !opt->o_o && !opt->o_u)
+	if (!opt->o_l && !opt->o_g && !opt->o_o && !opt->o_u)
 		return ;
 	timenow = time(0);
 	tmp = ctime(&date);
 	flag= 0;
 	tmp2 = NULL;
-	if ((timenow - /*15778463*/15778800) > date || timenow < date)
+	if ((timenow - 15778800) > date || timenow < date)
 		tmp = print_law_bis(tmp, tmp2, &flag);
 	else
 		tmp = ft_strsub(tmp, 4, 12);
@@ -70,8 +69,8 @@ void		ft_total_block(t_dir *current, t_opt *opt, int len)
 
 	i = 0;
 	total = 0;
-	if ((!opt->o_l || (opt->file == 1 && opt->o_a == 0)) 
-			&& opt->o_g == 0 && opt->o_o == 0)
+	if ((!opt->o_l || (opt->file && !opt->o_a)) 
+			&& !opt->o_g && !opt->o_o)
 		return ;
 	else
 	{
@@ -83,26 +82,31 @@ void		ft_total_block(t_dir *current, t_opt *opt, int len)
 	ft_putchar('\n');
 }
 
-void    print_filetype(char *name, int i, int *flag)
+void    print_filetype(char *name, int i, int *flag, t_opt *opt)
 {
 	*flag = 0;
 	if (i == 1)
 	{
-	//	ft_putstr(BLUE);
-		ft_putstr(name);
-		ft_putendl("/");
+		if (opt->o_G && opt->o_F)
+		{
+			ft_putstr(BLUE);
+			ft_putstr(name);
+			ft_putendl("/");
+			ft_putstr(RESET);
+		}
+		else if (opt->o_G)
+		{
+			ft_putstr(BLUE);
+			ft_putendl(name);
+			ft_putstr(RESET);
+		}
+		else
+		{
+			ft_putstr(name);
+			ft_putendl("/");
+		}
 	}
-	if (i == 2)
-	{
-	//	ft_putstr(RED);
-		ft_putstr(name);
-		ft_putendl("*");
-	}
-	if (i == 3)
-	{
-		ft_putstr(name);
-		ft_putendl("@");
-	}
+	print_filetype_bis(name, opt, i);
 }
 
 void    print_link(t_dir *dir, char *lnkpath, t_opt *opt)
@@ -114,19 +118,16 @@ void    print_link(t_dir *dir, char *lnkpath, t_opt *opt)
 		print_name(dir, opt);
 		return ;
 	}
-	else
+	else if (opt->o_G)
 	{
-		//	ft_putstr(WHITE);
-		ft_putstr(dir->name);
-		//	ft_putstr(RESET);
+		print_link_colors(dir, lnkpath);
+		return ;
 	}
+	else
+		ft_putstr(dir->name);
 	if ((path_size = readlink(lnkpath, lnkpath, MAX_PATH)) < 0)
 		return ;
 	lnkpath[path_size] = '\0';
-	//ft_putstr(YELLOW);
 	ft_putstr(" -> ");
-	//ft_putstr(RESET);
-	//ft_putstr(WHITE);
 	ft_putendl(lnkpath);
-	//ft_putstr(RESET);
 }

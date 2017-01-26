@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:02:28 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/26 15:02:35 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/26 15:42:58 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,13 @@ static int		get_opt_bis(char av, t_opt *opt)
 		opt->o_o = 1;
 	if (av == 'p')
 		opt->o_p = 1;
+	if (av == 'G')
+		opt->o_G = 1;
 	if (opt->o_a != 1 && opt->o_t != 1 &&  opt->o_R != 1 && opt->o_r != 1 
 			&& opt->o_l != 1 && opt->o_A != 1 && opt->o_F != 1 
 			&& opt->o_f != 1 && opt->o_1 != 1 && opt->o_S != 1 && 
 			opt->o_g != 1 && opt->o_o != 1 && opt->o_p != 1 && opt->o_u != 1 
-			&& opt->o_no_format != 1)
+			&& opt->o_G != 1 && opt->o_no_format != 1)
 		return (0);
 	return (1);
 }
@@ -71,7 +73,7 @@ static int		check_av(char *av, t_opt *opt)
 	{
 		while (av[++i])
 		{
-			if ((ft_one_opt("1laAtRfrFSgopu", av[i]) && get_opt(av[i], opt)) ||
+			if ((ft_one_opt("1laAtRfrFSgopuG", av[i]) && get_opt(av[i], opt)) ||
 					(av[1] == '-' && !av[2]))
 			{
 				flag = 1;
