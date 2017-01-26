@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:01:36 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/25 15:45:52 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/26 15:04:28 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void  print_only(t_dir *dir, int len, t_opt *opt)
 			;
 		else
 		{
-			if (opt->o_l == 1 || opt->o_g == 1 || opt->o_o == 1)
+			if (opt->o_l == 1 || opt->o_g == 1 || opt->o_o == 1 || opt->o_u == 1)
 			{
 				ft_get_mode(dir , i);
 				print_lnk(&dir[i], dir->size_lnk);

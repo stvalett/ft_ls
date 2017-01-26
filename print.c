@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:03:24 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/25 17:51:41 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/26 15:17:09 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void    print_name(t_dir *dir, t_opt *opt)
 	else if (S_ISLNK(dir->info.st_mode))
 	{
 		//ft_putstr(YELLOW);
-		if (opt->o_F || opt->o_p)
+		if (opt->o_F)
 			print_filetype(dir->name, 3, &flag);
 		print_link_bis(dir, opt);
 		flag = 0;
@@ -76,7 +76,10 @@ static void print_line_bis(t_dir *current, int len, t_opt *opt)
 					print_maj_min(&current[i], current->size_min, current->size_maj);
 				else
 					print_size(&current[i], current->size);
-				print_law((current + i)->info.st_mtime, opt);
+				if (opt->o_u)
+					print_law((current + i)->info.st_atime, opt);
+				else
+					print_law((current + i)->info.st_mtime, opt);
 				print_link(&current[i], current[i].all_path, opt);
 			}
 			else
@@ -102,7 +105,10 @@ static void	print_line(t_dir *current, int len, t_opt *opt)
 				print_maj_min(&current[i], current->size_min, current->size_maj);
 			else
 				print_size(&current[i], current->size);
-			print_law((current + i)->info.st_mtime, opt);
+			if (opt->o_u)
+				print_law((current + i)->info.st_atime, opt);
+			else
+				print_law((current + i)->info.st_mtime, opt);
 			print_link(&current[i], current[i].all_path, opt);
 		}
 		else

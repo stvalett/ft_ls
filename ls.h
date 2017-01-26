@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:00:46 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/25 17:44:06 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/26 15:10:42 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ typedef struct		s_opt
 	int				o_g;
 	int				o_o;
 	int				o_p;
+	int				o_u;
+	int				o_no_format;
 }					t_opt;
 
 typedef struct      s_mode
@@ -95,6 +97,7 @@ void				ft_free_mod(t_mode *mod);
 void				ft_free_current(t_dir *current, int ret, int flag);
 void				ft_link(t_dir *current);
 void				ft_init_sort(t_dir *current, int len, t_opt *opt);
+void				ft_sort_time_bis(t_dir *dir, int len, t_opt *opt);
 void				ft_init_size(t_dir *current, t_opt *opt, int len);
 void				ft_total_block(t_dir *current, t_opt *opt, int len);
 void				print_law(long date, t_opt *opt);

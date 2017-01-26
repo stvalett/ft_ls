@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:08:20 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/25 17:51:46 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/26 15:07:24 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	print_law(long date, t_opt *opt)
 	time_t	timenow;
 	int		flag;
 
-	if (opt->o_l == 0 && !opt->o_g && !opt->o_o)
+	if (opt->o_l == 0 && !opt->o_g && !opt->o_o && !opt->o_u)
 		return ;
 	timenow = time(0);
 	tmp = ctime(&date);

@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:10:03 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/25 17:27:15 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/26 15:09:14 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,11 @@ static void		ft_sort_time(t_dir *current, int len, t_opt *opt)
 	int		i;
 	int		flag;
 
+	if (opt->o_u == 1)
+	{
+		ft_sort_time_bis(current, len, opt);
+		return ;
+	}
 	if (opt->o_t == 0)
 		return ;
 	i = 0;
@@ -73,8 +78,8 @@ static void		ft_sort_time(t_dir *current, int len, t_opt *opt)
 	while (flag)
 	{
 		flag = 0;
-		i = 0;
-		while (i < len - 1)
+		i = -1;
+		while (++i < len - 1)
 		{
 			if ((current + i)->info.st_mtime < (current + i + 1)->info.st_mtime)
 			{
@@ -83,7 +88,6 @@ static void		ft_sort_time(t_dir *current, int len, t_opt *opt)
 				current[i + 1] = tmp;
 				flag = 1;
 			}
-			i++;
 		}
 		len--;
 	}
