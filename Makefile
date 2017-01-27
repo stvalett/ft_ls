@@ -6,7 +6,7 @@
 #    By: stvalett <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/23 16:57:07 by stvalett          #+#    #+#              #
-#    Updated: 2017/01/26 19:16:06 by stvalett         ###   ########.fr        #
+#    Updated: 2017/01/27 10:03:27 by stvalett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,26 +16,28 @@ CC = gcc
 
 CFLAG = -Wall -Wextra -Werror
 
-INCLUDE = ls.h
+INCLUDE = includes/ls.h
 
-SRCS = dir.c\
-	   error.c\
-	   info.c\
-	   main.c\
-	   parser.c\
-	   print.c\
-	   print_opt.c\
-	   print_opt2.c\
-	   size.c\
-	   sort.c\
-	   tool.c\
-	   utils.c\
-	   utils2.c
+SRCS = srcs/dir.c\
+	   srcs/error.c\
+	   srcs/info.c\
+	   srcs/main.c\
+	   srcs/parser.c\
+	   srcs/print.c\
+	   srcs/print_opt.c\
+	   srcs/print_opt2.c\
+	   srcs/size.c\
+	   srcs/sort.c\
+	   srcs/tool.c\
+	   srcs/utils.c\
+	   srcs/utils2.c
 
 OBJ = $(SRCS:.c=.o)
 
 all : $(NAME)
 
+$(OBJ) :
+	$(CC) $(CFLAG) -c $(SRCS)
 $(NAME) :
 	@make -C libft
 	@$(CC) $(CFLAG) $(SRCS) libft/libft.a -I$(INCLUDE) -o $(NAME)
