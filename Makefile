@@ -6,7 +6,7 @@
 #    By: stvalett <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/23 16:57:07 by stvalett          #+#    #+#              #
-#    Updated: 2017/01/27 10:03:27 by stvalett         ###   ########.fr        #
+#*   Updated: 2017/01/27 22:35:34 by stvalett         ###   ########.fr       *#
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ $(OBJ) :
 	$(CC) $(CFLAG) -c $(SRCS)
 $(NAME) :
 	@make -C libft
-	@$(CC) $(CFLAG) $(SRCS) libft/libft.a -I$(INCLUDE) -o $(NAME)
+	@$(CC) $(CFLAG) $(SRCS) libft/libft.a $(INCLUDE) -o $(NAME)
 
 clean :
 	@make clean -C libft

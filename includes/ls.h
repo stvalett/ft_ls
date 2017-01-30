@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:00:46 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/27 10:01:49 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/29 13:02:26 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,55 +36,55 @@
 
 typedef struct	s_dir
 {
-	struct stat		info;
-	struct passwd	pwd;
-	struct group	gid;
-	struct tm		time;
-	char			all_path[MAX_PATH];
-	char			*pathdir;
-	char			*name;
-	char			*tmp;
-	unsigned char	type;
-	unsigned short	length;
-	int				stat_current;
-	int				stat_handle;
-	int				size;
-	int				size_lnk;
-	int				size_uid;
-	int				size_gid;
-	int				size_min;
-	int				size_maj;
+    struct stat		info;
+    struct passwd	pwd;
+    struct group	gid;
+    struct tm		time;
+    char			all_path[MAX_PATH];
+    char			*pathdir;
+    char			*name;
+    char			*tmp;
+    unsigned char	type;
+    unsigned short	length;
+    int				stat_current;
+    int				stat_handle;
+    int				size;
+    int				size_lnk;
+    int				size_uid;
+    int				size_gid;
+    int				size_min;
+    int				size_maj;
 }				t_dir;
 
 typedef struct	s_opt
 {
-	char		*tab_opt[MAX_OPT];
-	int			len_opt;
-	int			o_option;
-	int			o_no_format;
-	int			file;
-	int			o_1;
-	int			o_a;
-	int			o_t;
-	int			o_up_r;
-	int			o_r;
-	int			o_l;
-	int			o_up_a;
-	int			o_up_s;
-	int			o_f;
-	int			o_up_f;
-	int			o_g;
-	int			o_up_g;
-	int			o_o;
-	int			o_p;
-	int			o_u;
+    char		*tab_opt[MAX_OPT];
+    int			len_opt;
+    int			o_option;
+    int			o_no_format;
+    int			file;
+    int			o_1;
+    int			o_a;
+    int			o_t;
+    int			o_up_r;
+    int			o_r;
+    int			o_l;
+    int			o_up_a;
+    int			o_up_s;
+    int			o_f;
+    int			o_up_f;
+    int			o_g;
+    int			o_up_g;
+    int			o_o;
+    int			o_p;
+    int			o_u;
 }				t_opt;
 
 typedef struct	s_mode
 {
-	char		str[MOD];
-	char		*buff;
-	char		**rigth;
+    char		str[MOD];
+    char		*buff;
+    char		**rigth;
 }				t_mode;
 
 t_opt			check_opt(int ac, char **a);
@@ -100,6 +100,7 @@ void			ft_link(t_dir *current);
 void			ft_init_sort(t_dir *current, int len, t_opt *opt);
 void			ft_sort_time_bis(t_dir *dir, int len, t_opt *opt);
 void			ft_init_size(t_dir *current, t_opt *opt, int len);
+void            ft_rev(t_opt *opt, int len);
 void			ft_total_block(t_dir *current, t_opt *opt, int len);
 void			print_law(long date, t_opt *opt);
 void			print_size(t_dir *dir, int size);

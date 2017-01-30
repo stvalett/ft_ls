@@ -155,15 +155,15 @@ INCLUDES = -Ilibft
 all : $(NAME)
 
 $(NAME) :
-	$(CC) -c $(CFLAGS) $(SRCS) $(INCLUDES)
-	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+	@$(CC) -c $(CFLAGS) $(SRCS) $(INCLUDES)
+	@ar rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
 
 clean :
-	rm -f $(OBJ)
+	@rm -f $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re : fclean all
 
