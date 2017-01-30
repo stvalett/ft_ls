@@ -10,6 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
+.PHONY : all clean fclean re
+
 NAME = ft_ls
 
 CC = gcc
@@ -40,16 +42,14 @@ $(OBJ) :
 	$(CC) $(CFLAG) -c $(SRCS)
 $(NAME) :
 	@make -C libft
-	@$(CC) $(CFLAG) $(SRCS) libft/libft.a $(INCLUDE) -o $(NAME)
+	$(CC) $(CFLAG) $(SRCS) libft/libft.a -I$(INCLUDE) -o $(NAME)
 
 clean :
 	@make clean -C libft
-	@rm -f $(OBJ)
+	rm -f $(OBJ)
 
 fclean : clean
 	@make fclean -C libft
-	@rm -f $(NAME)
+	rm -f $(NAME)
 
 re : fclean all
-
-.PHONY : clean fclean re

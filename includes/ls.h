@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:00:46 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/29 13:02:26 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/30 15:03:35 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <time.h>
 # include <grp.h>
 # include <stdlib.h>
+# include <stdio.h>
 # include "../libft/libft.h"
 
 # define EACCESS    13
@@ -62,6 +63,7 @@ typedef struct	s_opt
     int			len_opt;
     int			o_option;
     int			o_no_format;
+    struct stat		info;
     int			file;
     int			o_1;
     int			o_a;
@@ -90,7 +92,7 @@ typedef struct	s_mode
 t_opt			check_opt(int ac, char **a);
 t_opt			init_opt(void);
 void			valide_opt(t_opt *opt, char *av);
-void			lstdir(char *av, t_opt opt);
+int				lstdir(char *av, t_opt *opt);
 void			isdir_bis(t_dir *current, char *name);
 void			print_all(t_dir *current, int len, t_opt *opt, int flag);
 void			ft_get_mode(t_dir *current, int l);
@@ -101,6 +103,7 @@ void			ft_init_sort(t_dir *current, int len, t_opt *opt);
 void			ft_sort_time_bis(t_dir *dir, int len, t_opt *opt);
 void			ft_init_size(t_dir *current, t_opt *opt, int len);
 void            ft_rev(t_opt *opt, int len);
+void            ft_sort_bis_t(t_opt *opt, int len);
 void			ft_total_block(t_dir *current, t_opt *opt, int len);
 void			print_law(long date, t_opt *opt);
 void			print_size(t_dir *dir, int size);

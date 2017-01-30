@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 19:13:59 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/29 13:01:57 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/30 12:33:36 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,34 @@ void    ft_rev(t_opt *opt, int len)
         opt->tab_opt[len - 1] = tmp;
         len--;
     }
+}
+
+void	ft_sort_bis_t(t_opt *opt, int len)
+{
+	char 	*tmp;
+	int		i;
+	int		flag;
+	struct stat	info;
+	struct stat	info1;
+
+	i = 0;
+	flag = 1;
+	while (flag)
+	{
+		i = -1;
+		flag = 0;
+		while (++i < len - 1)
+		{
+			lstat(opt->tab_opt[i], &info);
+			lstat(opt->tab_opt[i + 1], &info1);
+			if (info.st_mtime < info1.st_mtime)
+			{
+				tmp = opt->tab_opt[i];
+				opt->tab_opt[i] = opt->tab_opt[i + 1];
+				opt->tab_opt[i + 1] = tmp;
+				flag = 1;
+			}
+		}
+		len--;
+	}
 }

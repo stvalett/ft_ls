@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:03:24 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/27 09:59:41 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/30 14:25:43 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void		print_all(t_dir *current, int len, t_opt *opt, int flag)
 {
 	ft_init_sort(current, len, opt);
 	ft_init_size(current, opt, len);
-	if (flag == 0)
+	if (flag == 0 && len > 0)
 		ft_total_block(current, opt, len);
 	if (!opt->o_up_a || opt->o_a)
 		print_line(current, len, opt);

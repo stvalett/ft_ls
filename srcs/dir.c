@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 16:58:25 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/28 11:59:58 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/30 16:18:37 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void		isdir(t_dir *current, t_opt *opt)
     char	path[MAX_PATH];
 
     d_name = current->name;
-    if (current->type == DT_DIR)
+    if (current->type & DT_DIR)
     {
         if ((ft_strcmp(d_name, "..") != 0 && ft_strcmp(d_name, ".") != 0))
         {
@@ -37,9 +37,9 @@ static void		isdir(t_dir *current, t_opt *opt)
                 ft_putstr(path);
                 ft_putendl(":");
             }
-            stat(d_name, &current->info);
-            isdir_bis(current, d_name);
-            lstdir(current->all_path, *opt);
+           // lstat(d_name, &current->info);
+           // isdir_bis(current, d_name);
+            lstdir(current->all_path, opt);
         }
     }
 }
@@ -69,7 +69,6 @@ static void		lstdir2(t_dir *current, t_opt *opt, int i, char *av)
     int				ret;
     static	int		count;
 
-    ret = 0;
     if (++count == 1 && opt->len_opt == 1)
         print_all(&current[0], i, opt, 0);
     else if (count >= 1 && opt->len_opt > 1)
@@ -85,15 +84,16 @@ static void		lstdir2(t_dir *current, t_opt *opt, int i, char *av)
         else
             ft_putstr(av);
         ft_putendl(":");
-        print_all(&current[0], i, opt, 0);
+       // print_all(&current[0], i, opt, 0);
     }
-    else
-        print_all(&current[0], i, opt, 0);
+   // else
+     //   print_all(&current[0], i, opt, 0);
+    ret = 0;
     while (ret < i && opt->o_up_r == 1)
         isdir(&current[ret++], opt);
 }
 
-void			lstdir(char *av, t_opt opt)
+int			lstdir(char *av, t_opt *opt)
 {
     int				i;
     t_dir			*current;
@@ -102,22 +102,23 @@ void			lstdir(char *av, t_opt opt)
 
     i = 0;
     if ((current = (t_dir *)malloc(sizeof(t_dir) *
-                    ft_count_all(av, &opt))) == NULL)
+                    ft_count_all(av, opt))) == NULL)
         exit(1);
     if ((path = opendir(av)) == NULL)
     {
         ft_free_current(current, i, 0);
-        return ;
+        return (1);
     }
     while ((file = readdir(path)) != NULL)
-        if (!opt.o_a && !opt.o_up_a && !opt.o_f)
+        if (!opt->o_a && !opt->o_up_a && !opt->o_f)
         {
             if (file->d_name[0] != '.')
                 current[i++] = get_path(av, file);
         }
         else
             current[i++] = get_path(av, file);
-    lstdir2(current, &opt, i, av);
+    lstdir2(current, opt, i, av);
     closedir(path);
     ft_free_current(current, i, 0);
+	return (0);
 }

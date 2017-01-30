@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:10:27 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/27 10:00:34 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/30 16:17:22 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ft_free_current(t_dir *current, int ret, int flag)
 		}
 		free(current);
 	}
-	else
+	if (flag == 0)
 	{
 		i = 0;
 		while (i < ret)

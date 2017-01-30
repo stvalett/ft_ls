@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:01:36 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/29 13:02:08 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/30 16:24:25 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,11 +133,13 @@ int				main(int ac, char **av)
     if (k != 0 && opt.len_opt > 1 && count != 0)
         ft_putchar('\n');
     ft_free_current(dir, opt.len_opt, 1);
-    i = 0;
     ft_sort_file(&opt, opt.len_opt);
     if (opt.o_r)
         ft_rev(&opt, opt.len_opt);
+	if (opt.o_t && !opt.o_u)
+		ft_sort_bis_t(&opt, opt.len_opt);
+    i = 0;
     while (i < opt.len_opt)
-        lstdir(opt.tab_opt[i++], opt);
+        lstdir(opt.tab_opt[i++], &opt);
     return (0);
 }
