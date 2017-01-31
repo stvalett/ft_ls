@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:08:20 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/27 10:00:00 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/30 20:14:52 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char	*print_law_bis(char *tmp, char *tmp2, int *flag)
 	if ((ft_strstr(tmp, "10000") != 0))
 	{
 		*flag = 1;
-		tmp2 = ft_strnew(7);
+		//tmp2 = ft_strnew(7);
 		tmp2 = ft_strsub(tmp, 24, 31);
 		tmp = ft_strsub(tmp, 4, 7);
 		tmp = ft_strjoin(tmp, " ");
@@ -26,7 +26,7 @@ static char	*print_law_bis(char *tmp, char *tmp2, int *flag)
 	}
 	else
 	{
-		tmp2 = ft_strnew(4);
+		//tmp2 = ft_strnew(4);
 		tmp2 = ft_strsub(tmp, 20, 24);
 		tmp = ft_strsub(tmp, 4, 6);
 		tmp = ft_strjoin(tmp, "  ");

@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:01:36 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/30 16:24:25 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/30 21:25:07 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void		print_only(t_dir *dir, int len, t_opt *opt)
             ;
         else
         {
-            if (opt->o_l || opt->o_g || opt->o_o || opt->o_u)
+            if (opt->o_l)
             {
                 ft_get_mode(dir, i);
                 print_lnk(&dir[i], dir->size_lnk);
@@ -95,7 +95,6 @@ static t_dir	*lstfile(int ac, char **av, int *k, int *count)
     t_dir	*dir;
     int		i;
 
-    dir = NULL;
     opt = check_opt(ac, av);
     if ((dir = malloc(sizeof(t_dir) * opt.len_opt)) == NULL)
         exit(1);

@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 16:58:25 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/30 16:18:37 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/30 20:16:53 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ static void		isdir(t_dir *current, t_opt *opt)
                 ft_putstr(path);
                 ft_putendl(":");
             }
-           // lstat(d_name, &current->info);
-           // isdir_bis(current, d_name);
+            lstat(d_name, &current->info);
+            isdir_bis(current, d_name);
             lstdir(current->all_path, opt);
         }
     }
@@ -77,17 +77,17 @@ static void		lstdir2(t_dir *current, t_opt *opt, int i, char *av)
             ft_putchar('\n');
         if ((current[0].pathdir) == NULL)
             ft_putstr(av);
-        else if (ft_strcmp(current[0].pathdir, "./") == 0 && opt->len_opt == 2)
+       /* else if (ft_strcmp(current[0].pathdir, "./") == 0 && opt->len_opt == 2)
             ft_putstr(".");
         else if (ft_strcmp(current[0].pathdir, ".") == 0 && count >= 2)
-            ft_putstr("./");
+            ft_putstr("./");*/
         else
             ft_putstr(av);
         ft_putendl(":");
-       // print_all(&current[0], i, opt, 0);
+        print_all(&current[0], i, opt, 0);
     }
-   // else
-     //   print_all(&current[0], i, opt, 0);
+    else
+        print_all(&current[0], i, opt, 0);
     ret = 0;
     while (ret < i && opt->o_up_r == 1)
         isdir(&current[ret++], opt);
