@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:08:20 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/30 20:14:52 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/31 17:55:02 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static char	*print_law_bis(char *tmp, char *tmp2, int *flag)
 	if ((ft_strstr(tmp, "10000") != 0))
 	{
 		*flag = 1;
-		//tmp2 = ft_strnew(7);
 		tmp2 = ft_strsub(tmp, 24, 31);
 		tmp = ft_strsub(tmp, 4, 7);
 		tmp = ft_strjoin(tmp, " ");
@@ -26,7 +25,6 @@ static char	*print_law_bis(char *tmp, char *tmp2, int *flag)
 	}
 	else
 	{
-		//tmp2 = ft_strnew(4);
 		tmp2 = ft_strsub(tmp, 20, 24);
 		tmp = ft_strsub(tmp, 4, 6);
 		tmp = ft_strjoin(tmp, "  ");
@@ -86,29 +84,11 @@ void		print_filetype(char *name, int i, int *flag, t_opt *opt)
 {
 	*flag = 0;
 	if (i == 1)
-	{
-		if (opt->o_up_g && opt->o_up_f)
-		{
-			ft_putstr(BLUE);
-			ft_putstr(name);
-			ft_putendl("/");
-			ft_putstr(RESET);
-		}
-		else if (opt->o_up_g)
-		{
-			ft_putstr(BLUE);
-			ft_putendl(name);
-			ft_putstr(RESET);
-		}
-		else
-		{
-			ft_putstr(name);
-			ft_putendl("/");
-		}
-	}
-	print_filetype_bis(name, opt, i);
-	if (i == 3)
-		ft_putstr(name);
+		print_colors_1(name, opt);
+	else if (i == 2)
+		print_colors_2(name, opt);
+	else if (i == 3)
+		print_colors_3(name, opt);
 }
 
 void		print_link(t_dir *dir, char *lnkpath, t_opt *opt)
@@ -120,13 +100,15 @@ void		print_link(t_dir *dir, char *lnkpath, t_opt *opt)
 		print_name(dir, opt);
 		return ;
 	}
-	else if (opt->o_up_g)
+	if (opt->o_up_g)
 	{
-		print_link_colors(dir, lnkpath);
+		print_link_colors(dir, lnkpath, opt);
 		return ;
 	}
 	else
 		ft_putstr(dir->name);
+	if (opt->o_up_f)
+		ft_putstr("@");
 	if ((path_size = readlink(lnkpath, lnkpath, MAX_PATH)) < 0)
 		return ;
 	lnkpath[path_size] = '\0';

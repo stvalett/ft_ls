@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:00:46 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/30 15:03:35 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/31 13:39:52 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define MOD		11
 # define WHITE      "\033[37m"
 # define RED		"\x1B[31m"
-# define GREY       "\032[0m"
+# define PINK		"\033[35m"
 # define RESET		"\033[0m"
 # define YELLOW		"\033[33m"
 # define BLUE		"\x1B[34m"
@@ -109,13 +109,15 @@ void			print_law(long date, t_opt *opt);
 void			print_size(t_dir *dir, int size);
 void			print_lnk(t_dir *dir, int size);
 void			print_link(t_dir *dir, char *lnkpath, t_opt *opt);
-void			print_link_colors(t_dir *dir, char *lnkpath);
+void			print_link_colors(t_dir *dir, char *lnkpath, t_opt *opt);
 void			print_uid(t_dir *dir, int size, t_opt *opt);
 void			print_gid(t_dir *dir, int size, t_opt *opt);
 void			print_name(t_dir *dir, t_opt *opt);
 void			print_maj_min(t_dir *dir, int size_min, int size_maj);
 void			print_filetype(char *name, int i, int *flag, t_opt *opt);
-void			print_filetype_bis(char *name, t_opt *opt, int i);
+void			print_colors_1(char *name, t_opt *opt);
+void			print_colors_2(char *name, t_opt *opt);
+void			print_colors_3(char *name, t_opt *opt);
 void			ft_error(int i, char *name);
 void			ft_error_argc(char c);
 int				ft_getmax_size(t_dir *dir, t_opt *opt, int len);

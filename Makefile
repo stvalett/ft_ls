@@ -32,7 +32,8 @@ SRCS = srcs/dir.c\
 	   srcs/sort.c\
 	   srcs/tool.c\
 	   srcs/utils.c\
-	   srcs/utils2.c
+	   srcs/utils2.c\
+	   srcs/colors.c
 
 OBJ = $(SRCS:.c=.o)
 
@@ -42,7 +43,7 @@ $(OBJ) :
 	$(CC) $(CFLAG) -c $(SRCS)
 $(NAME) :
 	@make -C libft
-	$(CC) $(CFLAG) $(SRCS) libft/libft.a $(INCLUDE) -o $(NAME)
+	$(CC) $(CFLAG) $(SRCS) libft/libft.a -I$(INCLUDE) -o $(NAME)
 
 clean :
 	@make clean -C libft

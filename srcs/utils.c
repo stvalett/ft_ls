@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 15:33:04 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/30 14:31:22 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/31 13:47:16 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,49 +66,20 @@ void	ft_sort_time_bis(t_dir *current, int len, t_opt *opt)
     }
 }
 
-void	print_link_colors(t_dir *dir, char *lnkpath)
+void	print_link_colors(t_dir *dir, char *lnkpath, t_opt *opt)
 {
     int	path_size;
 
-    ft_putstr(WHITE);
+    ft_putstr(PINK);
     ft_putstr(dir->name);
     ft_putstr(RESET);
+	if (opt->o_up_f)
+		ft_putstr("@");
     if ((path_size = readlink(lnkpath, lnkpath, MAX_PATH)) < 0)
         return ;
     lnkpath[path_size] = '\0';
-    ft_putstr(YELLOW);
     ft_putstr(" -> ");
-    ft_putstr(RESET);
-    ft_putstr(WHITE);
     ft_putendl(lnkpath);
-    ft_putstr(RESET);
-}
-
-void	print_filetype_bis(char *name, t_opt *opt, int i)
-{
-    if (i == 2)
-    {
-        if (opt->o_up_g && opt->o_up_f)
-        {
-            ft_putstr(RED);
-            ft_putstr(name);
-            ft_putendl("*");
-            ft_putstr(RESET);
-        }
-        else if (opt->o_up_g)
-        {
-            ft_putstr(RED);
-            ft_putendl(name);
-            ft_putstr(RESET);
-        }
-        else
-        {
-            ft_putstr(name);
-            ft_putendl("*");
-        }
-    }
-    if (i == 3)
-        ft_putstr("@");
 }
 
 void	isdir_bis(t_dir *current, char *name)

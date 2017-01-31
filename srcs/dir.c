@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 16:58:25 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/30 20:16:53 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/31 18:49:27 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,17 @@
 
 static int		get_addpath(t_dir *current, char path[MAX_PATH])
 {
-    ft_strcpy(path, current->pathdir);
-    ft_strcat(path, "/");
-    ft_strcat(path, current->name);
+	if (ft_strcmp(current->pathdir, "/") == 0)
+	{
+		ft_strcpy(path, current->pathdir);
+		ft_strcat(path, current->name);
+	}
+	else
+	{
+		ft_strcpy(path, current->pathdir);
+		ft_strcat(path, "/");
+		ft_strcat(path, current->name);
+	}
     return (0);
 }
 
@@ -67,21 +75,21 @@ static t_dir	get_path(char *av, struct dirent *file)
 static void		lstdir2(t_dir *current, t_opt *opt, int i, char *av)
 {
     int				ret;
+	struct stat		info;
     static	int		count;
 
     if (++count == 1 && opt->len_opt == 1)
         print_all(&current[0], i, opt, 0);
     else if (count >= 1 && opt->len_opt > 1)
     {
+		lstat(av, &info);
         if (count >= 2)
             ft_putchar('\n');
         if ((current[0].pathdir) == NULL)
             ft_putstr(av);
-       /* else if (ft_strcmp(current[0].pathdir, "./") == 0 && opt->len_opt == 2)
-            ft_putstr(".");
-        else if (ft_strcmp(current[0].pathdir, ".") == 0 && count >= 2)
-            ft_putstr("./");*/
-        else
+        if (S_ISLNK(info.st_mode) && opt->o_l == 1)
+			return ;
+		else
             ft_putstr(av);
         ft_putendl(":");
         print_all(&current[0], i, opt, 0);

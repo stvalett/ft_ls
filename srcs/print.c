@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:03:24 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/30 20:18:28 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/31 17:32:55 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ static void	print_link_bis(t_dir *dir, t_opt *opt)
 {
     int path_size;
 
+	if (opt->o_up_g)
+	{
+		print_link_colors(dir, dir->name, opt);
+		return ;
+	}
     if (lstat(dir->name, &dir->info) == 0 && opt->o_l)
     {
         ft_putstr(dir->name);
@@ -26,7 +31,7 @@ static void	print_link_bis(t_dir *dir, t_opt *opt)
         ft_putendl(dir->name);
     }
     else
-        ft_putendl(dir->name);
+		ft_putendl(dir->name);
 }
 
 void		print_name(t_dir *dir, t_opt *opt)
@@ -46,10 +51,11 @@ void		print_name(t_dir *dir, t_opt *opt)
     }
     else if (S_ISLNK(dir->info.st_mode))
     {
-        if (opt->o_up_f || opt->o_up_g)
-            print_filetype(dir->name, 3, &flag, opt);
-        print_link_bis(dir, opt);
         flag = 0;
+        if ((opt->o_up_f || opt->o_up_g) && !opt->o_l)
+            print_filetype(dir->name, 3, &flag, opt);
+		else
+			print_link_bis(dir, opt);
     }
     if (flag == 1)
         ft_putendl(dir->name);

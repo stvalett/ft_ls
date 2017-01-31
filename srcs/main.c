@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:01:36 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/30 21:25:07 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/01/31 18:41:04 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,14 @@ static t_dir	check_error(char *av)
 static void		print_only(t_dir *dir, int len, t_opt *opt)
 {
     int i;
+	struct stat info;
 
     i = -1;
     ft_init_sort(dir, len, opt);
     ft_init_size(dir, opt, len);
     while (++i < len)
-    {
+	{
+		lstat(opt->tab_opt[i], &info);
         if (ft_strcmp(dir[i].name, "NULL") == 0)
             ;
         else
@@ -56,7 +58,12 @@ static void		print_only(t_dir *dir, int len, t_opt *opt)
                 print_link(&dir[i], dir[i].name, opt);
             }
             else
-                print_name(&dir[i], opt);
+			{
+				if (S_ISLNK(info.st_mode))
+					;
+				else
+					print_name(&dir[i], opt);
+			}
         }
     }
 }
@@ -86,6 +93,8 @@ static void		ft_sort_file(t_opt *opt, int len)
         }
         len--;
     }
+    if (opt->o_r)
+        ft_rev(opt, opt->len_opt);
 }
 
 static t_dir	*lstfile(int ac, char **av, int *k, int *count)
@@ -93,6 +102,7 @@ static t_dir	*lstfile(int ac, char **av, int *k, int *count)
     DIR		*path;
     t_opt	opt;
     t_dir	*dir;
+	struct	stat info;
     int		i;
 
     opt = check_opt(ac, av);
@@ -102,7 +112,8 @@ static t_dir	*lstfile(int ac, char **av, int *k, int *count)
     ft_sort_file(&opt, opt.len_opt);
     while (++i < opt.len_opt)
     {
-        if ((path = opendir(opt.tab_opt[i])) == NULL)
+		lstat(opt.tab_opt[i], &info);
+        if ((path = opendir(opt.tab_opt[i])) == NULL || S_ISLNK(info.st_mode))
         {
             dir[*k] = check_error(opt.tab_opt[i]);
             *k = *k + 1;
@@ -133,8 +144,6 @@ int				main(int ac, char **av)
         ft_putchar('\n');
     ft_free_current(dir, opt.len_opt, 1);
     ft_sort_file(&opt, opt.len_opt);
-    if (opt.o_r)
-        ft_rev(&opt, opt.len_opt);
 	if (opt.o_t && !opt.o_u)
 		ft_sort_bis_t(&opt, opt.len_opt);
     i = 0;
