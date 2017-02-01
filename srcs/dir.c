@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 16:58:25 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/31 18:49:27 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/02/01 18:22:07 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,20 +75,20 @@ static t_dir	get_path(char *av, struct dirent *file)
 static void		lstdir2(t_dir *current, t_opt *opt, int i, char *av)
 {
     int				ret;
-	struct stat		info;
     static	int		count;
+	struct stat		info;
 
-    if (++count == 1 && opt->len_opt == 1)
+	lstat(av, &info);
+	if (S_ISLNK(info.st_mode) && opt->o_l)
+		return ;
+	else if (++count == 1 && opt->len_opt == 1)
         print_all(&current[0], i, opt, 0);
     else if (count >= 1 && opt->len_opt > 1)
     {
-		lstat(av, &info);
         if (count >= 2)
             ft_putchar('\n');
         if ((current[0].pathdir) == NULL)
             ft_putstr(av);
-        if (S_ISLNK(info.st_mode) && opt->o_l == 1)
-			return ;
 		else
             ft_putstr(av);
         ft_putendl(":");

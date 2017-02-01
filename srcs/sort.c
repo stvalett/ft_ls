@@ -6,13 +6,13 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:10:03 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/30 13:39:38 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/02/01 18:30:05 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ls.h"
 
-static void	ft_reverse(t_dir *current, int len, t_opt *opt)
+/*static void	ft_reverse(t_dir *current, int len, t_opt *opt)
 {
     t_dir	tmp;
     int		i;
@@ -31,7 +31,7 @@ static void	ft_reverse(t_dir *current, int len, t_opt *opt)
             len--;
         }
     }
-}
+}*/
 
 static void	ft_sort_alpha(t_dir *current, int len)
 {
@@ -59,7 +59,7 @@ static void	ft_sort_alpha(t_dir *current, int len)
     }
 }
 
-static void	ft_sort_time(t_dir *current, int len, t_opt *opt)
+/*static void	ft_sort_time(t_dir *current, int len, t_opt *opt)
 {
     t_dir	tmp;
     int		i;
@@ -115,15 +115,15 @@ static void	ft_sort_size(t_dir *current, int len, t_opt *opt)
         }
         len--;
     }
-}
+}*/
 
 void		ft_init_sort(t_dir *current, int len, t_opt *opt)
 {
     if (!opt->o_f)
     {
         ft_sort_alpha(current, len);
-        ft_sort_time(current, len, opt);
+        /*ft_sort_time(current, len, opt);
         ft_sort_size(current, len, opt);
-        ft_reverse(current, len, opt);
+        ft_reverse(current, len, opt);*/
     }
 }
