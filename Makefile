@@ -30,6 +30,7 @@ SRCS = srcs/dir.c\
 	   srcs/print_opt2.c\
 	   srcs/size.c\
 	   srcs/sort.c\
+	   srcs/sort_2.c\
 	   srcs/tool.c\
 	   srcs/utils.c\
 	   srcs/utils2.c\

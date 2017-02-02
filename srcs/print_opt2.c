@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:08:20 by stvalett          #+#    #+#             */
-/*   Updated: 2017/02/01 18:06:00 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/02/02 14:50:38 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,9 @@ void		print_filetype(char *name, int i, int *flag, t_opt *opt)
 void		print_link(t_dir *dir, char *lnkpath, t_opt *opt)
 {
 	int		path_size;
+	char	buf[MAX_PATH];
 
-	if (!(DT_LNK == dir->type))
+	if (!(S_ISLNK(dir->info.st_mode)))
 	{
 		print_name(dir, opt);
 		return ;
@@ -109,9 +110,9 @@ void		print_link(t_dir *dir, char *lnkpath, t_opt *opt)
 		ft_putstr(dir->name);
 	if (opt->o_up_f)
 		ft_putstr("@");
-	if ((path_size = readlink(lnkpath, lnkpath, MAX_PATH)) < 0)
+	if ((path_size = readlink(lnkpath, buf, MAX_PATH)) < 0)
 		return ;
-	lnkpath[path_size] = '\0';
+	buf[path_size] = '\0';
 	ft_putstr(" -> ");
-	ft_putendl(lnkpath);
+	ft_putendl(buf);
 }
