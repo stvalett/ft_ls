@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:03:24 by stvalett          #+#    #+#             */
-/*   Updated: 2017/02/02 17:30:59 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/02/03 17:48:05 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,12 +117,15 @@ static void	print_line(t_dir *dir, int len, t_opt *opt)
 
 void		print_all(t_dir *current, int len, t_opt *opt, int flag)
 {
-	ft_init_sort(current, len, opt);
-	ft_init_size(current, opt, len);
-	if (flag == 0 && len > 0)
-		ft_total_block(current, opt, len);
-	if (!opt->o_up_a || opt->o_a)
-		print_line(current, len, opt);
-	else
-		print_line_bis(current, len, opt);
+	if (current->stat_current == 1 || current->stat_handle == 1)
+	{
+		ft_init_sort(current, len, opt);
+		ft_init_size(current, opt, len);
+		if (flag == 0 && len > 0)
+			ft_total_block(current, opt, len);
+		if (!opt->o_up_a || opt->o_a)
+			print_line(current, len, opt);
+		else
+			print_line_bis(current, len, opt);
+	}
 }

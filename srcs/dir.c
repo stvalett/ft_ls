@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 16:58:25 by stvalett          #+#    #+#             */
-/*   Updated: 2017/02/02 14:57:14 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/02/03 20:24:20 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void		isdir(t_dir *current, t_opt *opt)
 	char	path[MAX_PATH];
 
 	d_name = current->name;
-	if (current->type & DT_DIR)
+	if (current->type & DT_DIR || S_ISDIR(current->info.st_mode))
 	{
 		if ((ft_strcmp(d_name, "..") != 0 && ft_strcmp(d_name, ".") != 0))
 		{
@@ -45,8 +45,7 @@ static void		isdir(t_dir *current, t_opt *opt)
 				ft_putstr(path);
 				ft_putendl(":");
 			}
-			lstat(d_name, &current->info);
-			isdir_bis(current, d_name);
+			isdir_bis(current->info.st_mode, d_name);
 			lstdir(current->all_path, opt);
 		}
 	}
@@ -67,8 +66,13 @@ static t_dir	get_path(char *av, struct dirent *file)
 		ft_putendl("Le chemin d'acces est trop grand");
 		exit(1);
 	}
-	current.stat_current = (stat(current.all_path, &current.info) < 0) ? 0 : 1;
-	current.stat_handle = (lstat(current.all_path, &current.info) < 0) ? 0 : 1;
+	current.stat_current = stat(current.all_path, &current.info) < 0 ? 0 : 1;
+	current.stat_handle = lstat(current.all_path, &current.info) < 0 ? 0 : 1;
+	if (!current.stat_current || !current.stat_handle)
+	{
+		ft_putstr("ft_ls: ");
+		perror(current.name);
+	}
 	return (current);
 }
 

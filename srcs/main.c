@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:01:36 by stvalett          #+#    #+#             */
-/*   Updated: 2017/02/02 18:24:46 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/02/03 18:13:44 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 t_dir			check_error(char *av)
 {
-	t_dir dir;
+	t_dir	dir;
 
-	if ((stat(av, &dir.info)) == 0
-			&& !(dir.info.st_mode & S_IRWXU))
+	if (((stat(av, &dir.info)) == 0 && !(dir.info.st_mode & S_IRWXU)
+				&& !(S_ISREG(dir.info.st_mode))))
 	{
 		ft_error(1, av);
 		dir.name = ft_strdup("NULL");
@@ -66,7 +66,6 @@ static void		ft_sort_file(t_opt *opt, int len)
 	int		i;
 	int		flag;
 
-	i = 0;
 	flag = 1;
 	while (flag)
 	{
@@ -85,8 +84,6 @@ static void		ft_sort_file(t_opt *opt, int len)
 		}
 		len--;
 	}
-	if (opt->o_r)
-		ft_rev(opt, opt->len_opt);
 }
 
 static void		lstfile(int ac, char **av)
@@ -124,8 +121,14 @@ int				main(int ac, char **av)
 	ft_sort_file(&opt, opt.len_opt);
 	if (opt.o_t && !opt.o_u)
 		ft_sort_bis(&opt, opt.len_opt);
-	i = 0;
-	while (i < opt.len_opt)
-		lstdir(opt.tab_opt[i++], &opt);
+	else if (opt.o_u && !opt.o_t)
+		ft_sort_bis_u(&opt, opt.len_opt);
+	if (opt.o_r)
+		ft_rev(&opt, opt.len_opt);
+	if (opt.o_up_s)
+		ft_sort_size_bis(&opt, opt.len_opt);
+	i = -1;
+	while (++i < opt.len_opt)
+		lstdir(opt.tab_opt[i], &opt);
 	return (0);
 }

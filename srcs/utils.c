@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 15:33:04 by stvalett          #+#    #+#             */
-/*   Updated: 2017/02/02 18:32:35 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/02/03 20:27:50 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,16 +107,11 @@ int		print_or_not(char *name, t_opt opt)
 	return (0);
 }
 
-void	isdir_bis(t_dir *current, char *name)
+void	isdir_bis(int mode, char *name)
 {
-	if (!(current->info.st_mode & S_IRUSR)
-			&& !(current->info.st_mode & S_IWUSR)
-			&& !(current->info.st_mode & S_IXUSR)
-			&& !(current->info.st_mode & S_IRGRP)
-			&& !(current->info.st_mode & S_IWGRP)
-			&& !(current->info.st_mode & S_IXGRP)
-			&& !(current->info.st_mode & S_IROTH)
-			&& !(current->info.st_mode & S_IWOTH)
-			&& !(current->info.st_mode & S_IXOTH))
+	if (!(mode & S_IRGRP)
+			&& !(mode & S_IROTH))
 		ft_error(1, name);
+	else
+		return ;
 }

@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 16:59:15 by stvalett          #+#    #+#             */
-/*   Updated: 2017/01/31 13:42:59 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/02/03 17:29:47 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_error(int i, char *name)
 		ft_putendl_fd(strerror(ENOENTT), 2);
 	}
 	if (flag == 0)
-		exit(0);
+		exit(1);
 }
 
 void	ft_error_argc(char c)

@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:00:46 by stvalett          #+#    #+#             */
-/*   Updated: 2017/02/02 18:30:32 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/02/03 20:12:17 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ t_opt				init_opt(void);
 void				valide_opt(t_opt *opt, char *av);
 void				lstfile_2(int *k, int *count, t_dir *dir, char *name);
 void				lstdir(char *av, t_opt *opt);
-void				isdir_bis(t_dir *current, char *name);
+void				isdir_bis(int mode, char *name);
 void				print_all(t_dir *current, int len, t_opt *opt, int flag);
 void				ft_get_mode(t_dir *current, int l);
 void				ft_free_mod(t_mode *mod);
@@ -107,6 +107,7 @@ void				ft_init_size(t_dir *current, t_opt *opt, int len);
 void				ft_rev(t_opt *opt, int len);
 void				ft_sort_bis(t_opt *opt, int len);
 void				ft_sort_bis_u(t_opt *opt, int len);
+void				ft_sort_size_bis(t_opt *opt, int len);
 void				ft_total_block(t_dir *current, t_opt *opt, int len);
 void				print_law(long date, t_opt *opt);
 void				print_size(t_dir *dir, int size);

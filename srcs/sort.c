@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:10:03 by stvalett          #+#    #+#             */
-/*   Updated: 2017/02/02 17:56:04 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/02/03 12:40:14 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static void	ft_sort_alpha(t_dir *current, int len)
 	int		i;
 	int		flag;
 
-	i = 0;
 	flag = 1;
 	while (flag)
 	{
