@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:01:36 by stvalett          #+#    #+#             */
-/*   Updated: 2017/02/03 18:13:44 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/02/04 22:36:42 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ t_dir			check_error(char *av)
 {
 	t_dir	dir;
 
-	if (((stat(av, &dir.info)) == 0 && !(dir.info.st_mode & S_IRWXU)
-				&& !(S_ISREG(dir.info.st_mode))))
+	if (((stat(av, &dir.info)) == 0 && ((!(dir.info.st_mode & S_IRUSR))
+                    || (!(dir.info.st_mode & S_IWUSR)) ||
+                    (!(dir.info.st_mode & S_IXUSR)))
+				&& (!(S_ISREG(dir.info.st_mode)))))
 	{
 		ft_error(1, av);
 		dir.name = ft_strdup("NULL");
