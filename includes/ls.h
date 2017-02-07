@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:00:46 by stvalett          #+#    #+#             */
-/*   Updated: 2017/02/05 10:38:21 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/02/06 15:22:56 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 # define LS_H
 
 # include <dirent.h>
-# include <sys/ioctl.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <pwd.h>
 # include <time.h>
 # include <grp.h>
 # include <stdlib.h>
-# include <attr/xattr.h>
 # include <stdio.h>
 # include "../libft/libft.h"
 
@@ -112,7 +110,6 @@ void				ft_sort_bis_u(t_opt *opt, int len);
 void				ft_sort_size_bis(t_opt *opt, int len);
 void				ft_total_block(t_dir *current, t_opt *opt, int len);
 void				print_law(long date, t_opt *opt);
-void                print_acl(t_dir *dir);
 void				print_size(t_dir *dir, int size);
 void				print_lnk(t_dir *dir, int size);
 void				print_link(t_dir *dir, char *lnkpath, t_opt *opt);
@@ -120,7 +117,6 @@ void				print_link_colors(t_dir *dir, char *lnkpath, t_opt *opt);
 void				print_uid(t_dir *dir, int size, t_opt *opt);
 void				print_gid(t_dir *dir, int size, t_opt *opt);
 void				print_name(t_dir *dir, t_opt *opt);
-void                display_simple(t_dir *current, int len, t_opt *opt);
 void				print_maj_min(t_dir *dir, int size_min, int size_maj);
 void				print_filetype(char *name, int i, int *flag, t_opt *opt);
 void				print_colors_1(char *name, t_opt *opt);

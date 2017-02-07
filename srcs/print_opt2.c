@@ -6,29 +6,31 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:08:20 by stvalett          #+#    #+#             */
-/*   Updated: 2017/02/03 13:24:15 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/02/07 12:38:13 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ls.h"
 
-static char	*print_law_bis(char *tmp, char *tmp2, int *flag)
+static char	*print_law_bis(char *tmp, int *flag)
 {
+	char	*tmp2;
+
 	if ((ft_strstr(tmp, "10000") != 0))
 	{
 		*flag = 1;
 		tmp2 = ft_strsub(tmp, 24, 31);
 		tmp = ft_strsub(tmp, 4, 7);
-		tmp = ft_strjoin(tmp, " ");
-		tmp = ft_strjoin(tmp, tmp2);
+		tmp = ft_strcat(tmp, " ");
+		tmp = ft_strcat(tmp, tmp2);
 		free(tmp2);
 	}
 	else
 	{
-		tmp2 = ft_strsub(tmp, 20, 24);
+		tmp2 = ft_strsub(tmp, 20, 4);
 		tmp = ft_strsub(tmp, 4, 6);
-		tmp = ft_strjoin(tmp, "  ");
-		tmp = ft_strjoin(tmp, tmp2);
+		tmp = ft_strcat(tmp, "  ");
+		tmp = ft_strcat(tmp, tmp2);
 		free(tmp2);
 	}
 	return (tmp);
@@ -37,7 +39,6 @@ static char	*print_law_bis(char *tmp, char *tmp2, int *flag)
 void		print_law(long date, t_opt *opt)
 {
 	char	*tmp;
-	char	*tmp2;
 	time_t	timenow;
 	int		flag;
 
@@ -46,15 +47,13 @@ void		print_law(long date, t_opt *opt)
 	timenow = time(0);
 	tmp = ctime(&date);
 	flag = 0;
-	tmp2 = NULL;
 	if ((timenow - 15778800) > date || timenow < date)
-		tmp = print_law_bis(tmp, tmp2, &flag);
+	{
+		tmp = print_law_bis(tmp, &flag);
+		tmp[ft_strlen(tmp)] = '\0';
+	}
 	else
 		tmp = ft_strsub(tmp, 4, 12);
-	if (flag == 1)
-		tmp[13] = '\0';
-	else
-		tmp[12] = '\0';
 	ft_putstr(tmp);
 	write(1, " ", 1);
 	free(tmp);

@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 15:33:04 by stvalett          #+#    #+#             */
-/*   Updated: 2017/02/04 12:23:21 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/02/06 17:20:16 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,8 @@ int		print_or_not(char *name, t_opt opt)
 
 void	isdir_bis(int mode, char *name)
 {
-	if ((!(mode & S_IRUSR)) || (!(mode & S_IWUSR))
-        || (!(mode & S_IXUSR)))
+	if (!(mode & S_IRGRP)
+			&& !(mode & S_IROTH))
 		ft_error(1, name);
 	else
 		return ;

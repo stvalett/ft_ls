@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 17:01:36 by stvalett          #+#    #+#             */
-/*   Updated: 2017/02/04 22:36:42 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/02/06 18:16:51 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,29 @@
 
 t_dir			check_error(char *av)
 {
-	t_dir	dir;
+	t_dir		dir;
+	DIR			*path;
+	static	int	count;
 
-	if (((stat(av, &dir.info)) == 0 && ((!(dir.info.st_mode & S_IRUSR))
-                    || (!(dir.info.st_mode & S_IWUSR)) ||
-                    (!(dir.info.st_mode & S_IXUSR)))
-				&& (!(S_ISREG(dir.info.st_mode)))))
-	{
-		ft_error(1, av);
-		dir.name = ft_strdup("NULL");
-	}
-	else if ((lstat(av, &dir.info)) == -1)
+	if ((lstat(av, &dir.info)) == -1)
 	{
 		ft_error(2, av);
 		dir.name = ft_strdup("NULL");
 	}
+	else if (S_ISDIR(dir.info.st_mode))
+	{
+		if ((path = opendir(av)) == NULL)
+		{
+			ft_putstr("ft_ls: ");
+			perror(av);
+			dir.name = ft_strdup("NULL");
+		}
+		else
+			closedir(path);
+	}
 	else
 		dir.name = ft_strdup(av);
+	count++;
 	return (dir);
 }
 

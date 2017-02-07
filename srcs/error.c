@@ -6,7 +6,7 @@
 /*   By: stvalett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 16:59:15 by stvalett          #+#    #+#             */
-/*   Updated: 2017/02/03 17:29:47 by stvalett         ###   ########.fr       */
+/*   Updated: 2017/02/06 15:16:29 by stvalett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,6 @@ void	ft_error_argc(char c)
 	ft_putstr_fd("illegal option -- ", 2);
 	ft_putchar_fd(c, 2);
 	ft_putchar_fd('\n', 2);
-	ft_putendl_fd("usage: ls [-1ARFSGlatrfgoup] [file ...]", 2);
+	ft_putendl_fd("usage: ls [-ARFSGlatrfgoup] [file ...]", 2);
 	exit(1);
 }
