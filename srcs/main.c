@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/ls.h"
+#include <stdio.h>
 
 t_dir			check_error(char *av)
 {
