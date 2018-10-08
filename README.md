@@ -1,7 +1,7 @@
 # ft_ls
 First projet UNIX 42
 
-This project is of rewrite the command ls from Linux/Unix
+This project is write the command ls with somes options.
 
 # Start
 ```
